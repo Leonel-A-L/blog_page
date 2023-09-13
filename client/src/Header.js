@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from './UserContext';
 
-export default function Header() {
-  const [username, setUsername] = useState(null);
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/login/profile', {
-          credentials: 'include',
-        });
-        if (response.ok) {
-          const userInfo = await response.json();
-          setUsername(userInfo.username);
-        } else {
-          console.error('Failed to fetch user profile');
-        }
-      } catch (error) {
-        console.error('An error occurred:', error);
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
+export default function Header(){
+    const{setUserInfo,userInfo} = useContext(UserContext);
+    useEffect(() => {
+        fetch('http:/localhost:8080/profile', {
+            credentials: 'include',
+        }).then(response => {
+            response.json().then(userInfo => {
+                setUserInfo(userInfo);
+            })
+        })
+    }, [])
 
   const handleLogout = async () => {
     try {
@@ -31,6 +21,7 @@ export default function Header() {
       });
 
       if (response.ok) {
+        setUserInfo(null)
         console.log('Logout successful');
       } else {
         console.error('Failed to logout');
@@ -39,6 +30,8 @@ export default function Header() {
       console.error('An error occurred:', error);
     }
   };
+
+const username = userInfo?.username
 
   return (
     <header>

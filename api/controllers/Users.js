@@ -44,7 +44,10 @@ async function userLogin(req, res) {
       // Passwords match, user is authenticated
       jwt.sign({username,id:userDoc.id},secret, {},(err,token) =>{
         if(err) throw err;
-        res.cookie('token',token).json('ok')
+        res.cookie('token',token).json({
+        id:userDoc._id,
+        username,
+        })
       })
     } else {
       // Passwords do not match
@@ -56,24 +59,27 @@ async function userLogin(req, res) {
   }
 }
 
-async function checkIfUserLogedIn(req,res){
+async function checkIfUserLogedIn(req, res) {
     try {
-        const { token } = req.cookies;
-    console.log('token',token,)
-    jwt.verify(token, secret, {}, (err, info) =>{
-        if(err) reject(err);
-        resolve(info)
-    })
+      const { token } = req.cookies;
+      console.log('token', token);
+  
+      const info = await new Promise((resolve, reject) => {
+        jwt.verify(token, secret, {}, (err, info) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(info);
+          }
+        });
+      });
+  
+      res.json(info);
     } catch (error) {
-        
+      console.error(error);
+      res.status(401).json({ message: "Authentication failed" });
     }
-    const { token } = req.cookies;
-    console.log('token',token,)
-    jwt.verify(token, secret, {}, (err, info) =>{
-        if(err) throw err;
-        res.json(info)
-    })
-}
+  }
 
 async function userLogout(req,res) {
     res.cookie('token','').json('ok')

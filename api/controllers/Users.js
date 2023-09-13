@@ -1,17 +1,70 @@
 const Users = require("../models/Users");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
-//Create Users
+
+const saltRounds = 10; // Define the number of salt rounds
+const secret = 'sdwadasdasdasdwqd23314234de3c322f3'
+
+// Create Users
 async function createUsers(req, res) {
-    try {
-      if (!req.body.image) req.body.image = undefined;
-      const users = await new Users(req.body).save();
-      const id = users.id;
-      res.status(201).json({ message: "User Created", id });
-    } catch (error) {
-      res.json({ message: "Error Creating User" });
-    }
-  }
+  try {
+    const { username, password } = req.body;
 
-  module.exports = {
-    createUsers
+    // Generate a salt and hash the password
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const userDoc = await Users.create({
+      username,
+      password: hashedPassword, // Store the hashed password
+    });
+
+    res.status(201).json({ message: "User Created", userDoc });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "Error Creating User" });
   }
+}
+
+// User Login
+async function userLogin(req, res) {
+  const { username, password } = req.body;
+  try {
+    const userDoc = await Users.findOne({ username });
+    
+    if (!userDoc) {
+      // User not found
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    const passOk = await bcrypt.compare(password, userDoc.password); // Comparing passwords
+
+    if (passOk) {
+      // Passwords match, user is authenticated
+      jwt.sign({username,id:userDoc.id},secret, {},(err,token) =>{
+        if(err) throw err;
+        res.cookie('token',token).json('ok')
+      })
+    } else {
+      // Passwords do not match
+      res.status(401).json({ message: "Authentication failed" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "Error Getting User" });
+  }
+}
+
+async function checkIfUserLogedIn(req,res){
+    const { tokent } = req.cookies;
+    jwt.verify(tokent, secret, {}, (err, info) =>{
+        if(err) throw err;
+        res.json(info)
+    })
+}
+module.exports = {
+  createUsers,
+  userLogin,
+  checkIfUserLogedIn
+};

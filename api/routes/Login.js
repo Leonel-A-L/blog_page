@@ -1,12 +1,17 @@
 const router = require("express").Router();
 const {
-  userLogin, checkIfUserLogedIn
+  userLogin, 
+  checkIfUserLogedIn, 
+  userLogout
 } = require("../controllers/Users");
+
+//Check if User Logged In
+router.get("/profile", checkIfUserLogedIn)
 
 //User Login
 router.post("/", userLogin);
 
-//Check if User Logged In
-router.get("/profile", checkIfUserLogedIn)
+//User Logout
+router.post('/logout',userLogout)
 
 module.exports = router

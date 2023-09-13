@@ -57,14 +57,31 @@ async function userLogin(req, res) {
 }
 
 async function checkIfUserLogedIn(req,res){
-    const { tokent } = req.cookies;
-    jwt.verify(tokent, secret, {}, (err, info) =>{
+    try {
+        const { token } = req.cookies;
+    console.log('token',token,)
+    jwt.verify(token, secret, {}, (err, info) =>{
+        if(err) reject(err);
+        resolve(info)
+    })
+    } catch (error) {
+        
+    }
+    const { token } = req.cookies;
+    console.log('token',token,)
+    jwt.verify(token, secret, {}, (err, info) =>{
         if(err) throw err;
         res.json(info)
     })
 }
+
+async function userLogout(req,res) {
+    res.cookie('token','').json('ok')
+}
+
 module.exports = {
   createUsers,
   userLogin,
-  checkIfUserLogedIn
+  checkIfUserLogedIn,
+  userLogout
 };

@@ -41,7 +41,7 @@ const username = userInfo?.username
       <nav>
         {username ? (
           <>
-            <a href='/create'>Create new post</a>
+            <a href='/createPost'>Create new post</a>
             <a onClick={handleLogout}>Logout</a>
           </>
         ) : (

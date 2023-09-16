@@ -36,7 +36,7 @@ const username = userInfo?.username
   return (
     <header>
       <a href='/' className='logo'>
-        MyBlog
+        GUTD
       </a>
       <nav>
         {username ? (

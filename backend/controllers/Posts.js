@@ -59,7 +59,9 @@ async function getPosts(req, res) {
 }
 
 async function getPostById(req,res) {
-
+    const {id} = req.params
+     const postDoc = await Post.findById(id).populate('author',['username']);
+     res.json(postDoc)
 }
 
 module.exports = {

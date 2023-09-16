@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill'; 
 import 'react-quill/dist/quill.snow.css';
+import { Navigate } from 'react-router-dom'; 
 
 const modules = {
   toolbar: [
@@ -29,34 +30,44 @@ export default function CreatePost() {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [content, setContent] = useState('');
-  const [file, setFile] = useState(null); // Initialize file state as null
+  const [file, setFile] = useState(null);
+  const [redirect, setRedirect] = useState(false);
 
-  function createNewPost(ev) {
+  async function createNewPost(ev) {
     ev.preventDefault();
 
     const data = new FormData();
     data.set('title', title);
     data.set('summary', summary);
     data.set('content', content);
-    data.append('file', file); // Use append to add files to FormData
+    if (file) {
+      data.append('file', file); 
+    }
 
-    console.log(data);
-
-    fetch('http://localhost:8080/post', {
-      method: 'POST',
-      body: data,
-    })
-      .then(response => response.json())
-      .then(result => {
+    try {
+      const response = await fetch('http://localhost:8080/post', {
+        method: 'POST',
+        body: data,
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        setRedirect(true)
+        const result = await response.json();
         // Handle the response/result from the server
         console.log(result);
-      })
-      .catch(error => {
-        // Handle any errors that occurred during the fetch
-        console.error('Error:', error);
-      });
+      } else {
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the fetch
+      console.error('Error:', error);
+    }
   }
 
+  if (redirect) {
+    return <Navigate to={'/'} />
+  }
   return (
     <form onSubmit={createNewPost}>
       <input type="text" placeholder="Title" value={title} onChange={(ev) => setTitle(ev.target.value)} />

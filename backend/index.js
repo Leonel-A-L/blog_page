@@ -16,14 +16,17 @@ const app = express();
 app.use(express.json());
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(cookieParser())
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 const createUsers = require("./routes/Register");
 const userLogin = require("./routes/Login")
+const post = require('./routes/Post')
 
 
 //routes
 app.use('/register', createUsers)
 app.use('/login', userLogin)
+app.use('/post', post)
 
 // db connection
 mongoose

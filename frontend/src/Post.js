@@ -1,19 +1,25 @@
-export default function Post() {
+import { format } from "date-fns"
+import { Link } from "react-router-dom"
+
+export default function Post({ _id,title, summary, cover, content, createdAt, author}) {
+
     return(
-        <div className='entries'>
-            <div className='post'>
+        <div className='post'>
             <div className='img'>
-                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7JKmZpkjrZMA_iAyPTT3vhk4kA38aO78TA&usqp=CAU'alt='Camaro Pic'></img>
+                < Link to={`/post/${_id}`}>
+                <img src={'http://localhost:8080/'+cover}alt=''></img>
+                </Link>
             </div>
             <div className='texts'>
-                <h2>Here's When 2024 Chevy Camaro Production Is Scheduled To End</h2>
+                < Link to={`/post/${_id}`} >
+                <h2>{title}</h2>
+                </Link>
                 <p className='info'>
-                <a className='author'>Leonel Lamelas</a>
-                <time>2023-09-11 10:15</time>
+                <a className='author'>{author.username}</a>
+                <time>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</time>
                 </p>
-                <p className='summary'>The end of production for the 2024 Chevy Camaro is an important date and milestone in the sports car's history, so it's worth recalling when the last units will roll off the assembly line at GM factories.</p>
+                <p className='summary'>{summary}</p>
             </div>
-            </div>
-        </div>
+         </div>
     )
 }

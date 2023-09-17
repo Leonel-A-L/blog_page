@@ -64,8 +64,54 @@ async function getPostById(req,res) {
      res.json(postDoc)
 }
 
+async function updatePost(req,res) {
+    try {
+        
+        upload.single('file')(req, res, async (err) => {
+            let newPath = null
+            if (req.file){
+                if (err) {
+                    // Handle any upload errors here
+                    console.error(err);
+                    return res.status(500).json({ message: 'File upload failed' });
+                }
+
+                const { originalname, path } = req.file;
+                const parts = originalname.split('.');
+                const ext = parts[parts.length - 1];
+                newPath = path + '.' + ext;
+                fs.renameSync(path, newPath);
+             }
+            const { token } = req.cookies;
+
+            jwt.verify(token, secret, {}, async (err, info) => {
+                if (err) {
+                    return res.status(401).json({ message: 'Authentication failed' });
+                }
+                
+
+                const { id,title, summary, content } = req.body;
+                const postDoc = await Post.findById(id);
+                const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+                if (!isAuthor) {
+                    return res.status(400).json('Not Allowed');
+                }
+                await postDoc.updateOne({title, summary, content, cover: newPath ? newPath : postDoc.cover});
+                
+                res.json(postDoc)
+            });
+        });
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+}
+
 module.exports = {
     createPost,
     getPosts,
-    getPostById
+    getPostById,
+    updatePost
 };

@@ -41,13 +41,13 @@ const username = userInfo?.username
       <nav>
         {username ? (
           <>
-            <a href='/createPost'>Create new post</a>
-            <a onClick={handleLogout}>Logout</a>
+            <button><a href='/createPost'>Create new post</a></button>
+            <button><a  onClick={handleLogout}>Logout</a></button>
           </>
         ) : (
           <>
-            <a href='/login'>Login</a>
-            <a href='/register'>Register</a>
+            <button><a href='/login'>Login</a></button>
+            <button><a href='/register'>Register</a></button>
           </>
         )}
       </nav>

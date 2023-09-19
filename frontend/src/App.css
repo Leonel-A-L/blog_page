@@ -15,6 +15,7 @@ main{
   padding: 10px;
   max-width: 960px;
   margin: 0 auto;
+  background-color: rgba(183, 233, 249, 0.618);
 }
 
 /* Header Styling */
@@ -25,7 +26,7 @@ header{
   margin-top: 20px;
   margin-bottom: 50px;
   align-items: center;
-  color: rgba(2, 140, 247, 0.565);
+  color: rgba(2, 2, 247, 0.618);
   background-color: lightblue;
   border-radius: 7px;
 }
@@ -73,7 +74,7 @@ div.post p.info{
 }
 
 div.post p.info a.author{
-  color: #333;
+  color: rgb(2, 141, 247);
 }
 
 div.post p.summary{
@@ -144,6 +145,7 @@ div.selectedPost .author{
   margin-bottom: 20px;
   font-size: .8rem;
   font-weight: bold;
+  color: rgb(2, 141, 247);
 }
 
 div.selectedPost div.content p{
@@ -170,6 +172,8 @@ a svg{
   height: 25px;
 }
 
+/* Sets screen view for normal phones like IPhone and Androids */
+
 @media (min-width: 281px) and (max-width: 426px) {
   div.post div.texts h2 {
     font-size: 17px;
@@ -185,6 +189,8 @@ a svg{
   }
 }
 
+/* Sets screen view for smaller-width phones and devices */
+
 @media (max-width: 280px) {
   div.post div.texts h2 {
     font-size: 15px;
@@ -195,7 +201,9 @@ a svg{
   }
 }
 
-@media (min-width: 1000px) and (max-width: 1400px) {
+/* Sets screen view for small laptops and larger laptops & pc's */
+
+@media (min-width: 1024px) and (max-width: 1400px) {
   main{
     padding: 10px 50px 10px 50px;
     max-width: 1300px;
@@ -217,6 +225,8 @@ a svg{
   }
 }
 
+/* Sets screen view for small to large tablets */
+
 @media (min-width: 539px) and (max-width: 1024px) {
   main{
     padding: 10px 35px 10px 35px;
@@ -231,6 +241,8 @@ a svg{
     font-size: 14px;
   }
 }
+
+/* Sets screen view for larger phones and smaller tablets */
 
 @media (min-width: 426px) and (max-width: 539px) {
   main{

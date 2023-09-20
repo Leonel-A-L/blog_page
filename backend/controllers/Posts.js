@@ -109,9 +109,37 @@ async function updatePost(req,res) {
 
 }
 
+async function deletePost(req, res) {
+    try {
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) {
+                return res.status(401).json({ message: 'Authentication failed' });
+            }
+
+            const { id } = req.params;
+            const postDoc = await Post.findById(id);
+            const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+
+            if (!isAuthor) {
+                return res.status(400).json('Not Allowed');
+            }
+
+            // Delete the post document
+            await Post.deleteOne({ _id: id });
+
+            res.json({ message: 'Post deleted successfully' });
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
 module.exports = {
     createPost,
     getPosts,
     getPostById,
-    updatePost
+    updatePost,
+    deletePost
 };

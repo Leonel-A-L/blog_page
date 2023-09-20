@@ -108,6 +108,15 @@ button{
   padding: 7px 0;
 }
 
+button.deletePostButton {
+  width: 150px;
+  margin: auto;
+}
+
+button.deletePostButton svg.w-6-h-6 {
+  margin: auto;
+}
+
 form.login h1, form.register h1{
   text-align: center;
 }
@@ -166,10 +175,13 @@ div.selectedPost a.editPostButton{
   padding: 15px 30px;
   border-radius: 5px;
   text-decoration: none;
+  width: 130px;
+  font-size: 12px;
 }
 
 a svg{
-  height: 25px;
+  height: 18px;
+  margin: auto;
 }
 
 /* Sets screen view for normal phones like IPhone and Androids */

@@ -22,7 +22,7 @@ export default function LoginPage() {
                 setRedirect(true);
             })
         } else {
-            alert('Make Sure Email And Or Password Is Correct.');
+            alert('Make Sure Username and/or Password Is Correct.');
         }
     }
 
@@ -35,13 +35,13 @@ export default function LoginPage() {
             <h1>Login</h1>
             <input
                 type="text"
-                placeholder="username"
+                placeholder="Username"
                 value={username}
                 onChange={(ev) => setUsername(ev.target.value)}
             />
             <input
                 type="password" // Change the input type to password
-                placeholder="password"
+                placeholder="Password"
                 value={password}
                 onChange={(ev) => setPassword(ev.target.value)}
             />

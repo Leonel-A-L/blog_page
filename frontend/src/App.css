@@ -23,7 +23,7 @@ header{
   position: sticky; top: 0;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 50px;
   align-items: center;
   color: rgba(2, 2, 247, 0.618);
@@ -39,6 +39,7 @@ header a{
 header a.logo{
   font-weight: bold;
   font-size: 1.5rem;
+  color: #02008fc2;
 }
 
 header nav{
@@ -111,6 +112,8 @@ button{
 button.deletePostButton {
   width: 150px;
   margin: auto;
+  background-color: #02008fc2;
+  color: white;
 }
 
 button.deletePostButton svg.w-6-h-6 {
@@ -167,7 +170,7 @@ div.edit-row{
 }
 
 div.selectedPost a.editPostButton{
-  background-color: #333;
+  background-color: #02008fc2;
   display: inline-flex;
   align-items: center;
   gap: 5px;

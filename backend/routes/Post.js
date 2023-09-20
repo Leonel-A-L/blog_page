@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { createPost, getPosts, getPostById, updatePost } = require("../controllers/Posts");
+const { createPost, getPosts, getPostById, updatePost, deletePost } = require("../controllers/Posts");
 
 //Create Post 
 router.post("/",  createPost)
@@ -12,5 +12,8 @@ router.get("/:id", getPostById)
 
 //Edit Post
 router.put("/", updatePost)
+
+//Delete Post
+router.delete("/:id", deletePost)
 
 module.exports = router

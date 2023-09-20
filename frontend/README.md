@@ -1,5 +1,5 @@
 # Milestone Project: Blog Page
-Created by: 
+Created by: Leonel (https://github.com/Leonel-A-L) & Josh (https://github.com/joshcline)
 
 # Getting Started with Create React App
 

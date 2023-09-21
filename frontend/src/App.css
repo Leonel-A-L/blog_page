@@ -42,6 +42,12 @@ header a.logo{
   color: #02008fc2;
 }
 
+header img.Blog-Logo {
+  border-radius: 120px;
+  width: 65px;
+  margin-top: 6px;
+}
+
 header nav{
   display:flex;
   gap: 15px;

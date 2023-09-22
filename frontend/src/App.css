@@ -201,6 +201,10 @@ button.register {
 button.Logout {
   margin-right: 10px;
 }
+
+nav h3 {
+  color: #02008fc2;
+}
 /* Sets screen view for normal phones like IPhone and Androids */
 
 @media (min-width: 281px) and (max-width: 426px) {

@@ -195,16 +195,33 @@ a svg{
 }
 
 button.register {
-  margin-right: 10px;
+  margin: 10px 10px 10px 0px;
 }
 
 button.Logout {
-  margin-right: 10px;
+  margin: 10px 10px 10px 0px;
 }
 
 nav h3 {
   color: #02008fc2;
 }
+
+a.New-Post {
+  font-size: 12px;
+}
+
+button.buttons {
+  margin: 10px -5px 10px 0px;
+}
+
+a.Login {
+  padding: 0px 5px 0px 5px;
+}
+
+a.Register {
+  padding: 4px;
+}
+
 /* Sets screen view for normal phones like IPhone and Androids */
 
 @media (min-width: 281px) and (max-width: 426px) {

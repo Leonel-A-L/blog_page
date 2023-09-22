@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { UserContext } from './UserContext';
 
 export default function Header(){
@@ -11,7 +11,7 @@ export default function Header(){
                 setUserInfo(userInfo);
             })
         })
-    }, [])
+    }, [setUserInfo])
 
   const handleLogout = async () => {
     try {
@@ -36,8 +36,9 @@ const username = userInfo?.username
   return (
     <header>
       <a href='/' className='logo'>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-_xNd23VMqwIsF1mg3bp0-LT1eMOxPOXgqQ&usqp=CAU' className='Blog-Logo' />
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-_xNd23VMqwIsF1mg3bp0-LT1eMOxPOXgqQ&usqp=CAU' className='Blog-Logo' alt='Logo' />
       </a>
+      
       <nav>
         {username ? (
           <>
@@ -52,7 +53,7 @@ const username = userInfo?.username
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-21 2 65 20" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
               </svg>
-              <a  onClick={handleLogout}>Logout</a>
+              <a href='/login' onClick={handleLogout}>Logout</a>
             </button>
           </>
         ) : (

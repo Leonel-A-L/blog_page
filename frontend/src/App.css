@@ -46,6 +46,7 @@ header img.Blog-Logo {
   border-radius: 120px;
   width: 65px;
   margin-top: 6px;
+  margin-left: 10px;
 }
 
 header nav{
@@ -193,6 +194,13 @@ a svg{
   margin: auto;
 }
 
+button.register {
+  margin-right: 5px;
+}
+
+button.Logout {
+  margin-right: 10px;
+}
 /* Sets screen view for normal phones like IPhone and Androids */
 
 @media (min-width: 281px) and (max-width: 426px) {

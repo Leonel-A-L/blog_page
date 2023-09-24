@@ -237,17 +237,58 @@ a.Register {
     padding: 10px 28px 10px 28px;
     max-width: 426px;
   }
+
+  a.logo img.Blog-Logo {
+    width: 50px;
+  }
+
+  button.Logout {
+    width: 45px;
+  }
+
+  button.buttons {
+    width: 45px;
+    height: 60px;
+  }
+
+  h3 {
+    margin: 27px -10px 0px 15px;
+    font-size: 15px;
+    font-weight: bold;
+  }
 }
 
 /* Sets screen view for smaller-width phones and devices */
 
-@media (max-width: 280px) {
+@media (min-width: 200px) and (max-width: 281px) {
   div.post div.texts h2 {
     font-size: 15px;
   }
 
   div.post p.summary {
     font-size: 10px;
+  }
+
+  a.logo img.Blog-Logo {
+    width: 50px;
+  }
+
+  button.Logout {
+    width: 50px;
+    height: 65px;
+  }
+
+  button.buttons {
+    width: 50px;
+    height: 65px;
+  }
+
+  h3 {
+    margin-left: 25px;
+    margin-right: -7px;
+    margin-top: 30px;
+    font-size: 12px;
+    font-weight: bold;
   }
 }
 
